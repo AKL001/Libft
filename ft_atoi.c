@@ -6,12 +6,12 @@
 /*   By: ablabib <ablabib@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 16:28:58 by ablabib           #+#    #+#             */
-/*   Updated: 2024/10/27 16:35:16 by ablabib          ###   ########.fr       */
+/*   Updated: 2024/10/29 20:13:42 by ablabib          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "stdio.h"
+
 int	ft_atoi(const char *src)
 {
 	size_t	i;
@@ -31,11 +31,4 @@ int	ft_atoi(const char *src)
 		i++;
 	}
 	return (nb * sign);
-}
-
-int main()
-{
-	char c[] = "++47";
-	printf("%d\n",ft_atoi(c));
-
 }

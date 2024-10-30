@@ -13,8 +13,8 @@
 
 static int	c_w(char const *str, char c)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	j = 0;
 	i = 0;
@@ -34,7 +34,7 @@ static int	c_w(char const *str, char c)
 
 static char	**freethenipples(char **s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i])
@@ -48,7 +48,7 @@ static char	**freethenipples(char **s)
 
 static int	s_p(char const *s, char c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i] == c && s[i])
@@ -58,7 +58,7 @@ static int	s_p(char const *s, char c)
 
 static int	len_str(char const *s, int i, char c)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	while (s[i] != c && s[i])
@@ -69,7 +69,7 @@ static int	len_str(char const *s, int i, char c)
 	return (len);
 }
 
-char		**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**cpy;
 	int		len;
@@ -79,7 +79,7 @@ char		**ft_split(char const *s, char c)
 
 	k = -1;
 	i = 0;
-	if (!s || !(cpy = (char**)malloc(sizeof(char*) * (c_w(s, c) + 1))))
+	if (!s || !(cpy = (char **)malloc(sizeof(char *) * (c_w(s, c) + 1))))
 		return (0);
 	while (s[i])
 	{
