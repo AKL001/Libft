@@ -5,93 +5,99 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ablabib <ablabib@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/27 15:52:06 by ablabib           #+#    #+#             */
-/*   Updated: 2024/10/30 10:51:37 by ablabib          ###   ########.fr       */
+/*   Created: 2024/10/30 13:33:35 by ablabib           #+#    #+#             */
+/*   Updated: 2024/10/30 13:34:48 by ablabib          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
-static int	c_w(char const *str, char c)
+static int	count_words(char const *s, char c)
 {
-	int	i;
-	int	j;
+	size_t	counter;
+	size_t	i;
+	int		flag;
 
-	j = 0;
+	flag = 1;
 	i = 0;
-	while (str[i] != '\0')
-	{
-		while (str[i] == c && str[i] != '\0')
-		{
-			i++;
-		}
-		if (str[i] != c && str[i] != '\0')
-			j++;
-		while (str[i] != c && (str[i] != '\0'))
-			i++;
-	}
-	return (j);
-}
-
-static char	**freethenipples(char **s)
-{
-	int	i;
-
-	i = 0;
+	counter = 0;
 	while (s[i])
 	{
-		free(s[i]);
+		if (s[i] != c && flag)
+		{
+			counter++;
+			flag = 0;
+		}
+		else if (s[i] == c)
+			flag = 1;
 		i++;
 	}
-	free(s);
-	return (NULL);
+	return (counter);
 }
 
-static int	s_p(char const *s, char c)
+static int	safe_allocate(char **ptr, int pos, size_t len)
 {
 	int	i;
 
 	i = 0;
-	while (s[i] == c && s[i])
-		i++;
-	return (i);
+	*ptr = malloc(len);
+	if (!*ptr)
+	{
+		while (i < pos)
+		{
+			free(ptr[i++]);
+		}
+		free(ptr);
+		return (1);
+	}
+	return (0);
 }
 
-static int	len_str(char const *s, int i, char c)
+static int	allocate_words(char **ptr, char *s, char c)
 {
-	int	len;
+	unsigned int	i;
+	size_t			len;
 
-	len = 0;
-	while (s[i] != c && s[i])
+	i = 0;
+	while (*s)
 	{
-		len++;
-		i++;
+		len = 0;
+		while (*s == c && *s)
+			s++;
+		while (*s != c && *s)
+		{
+			len++;
+			s++;
+		}
+		if (len > 0)
+		{
+			if (safe_allocate(&ptr[i], i, len + 1))
+				return (1);
+			ft_memcpy(ptr[i], s - len, len);
+			ptr[i][len] = '\0';
+			i++;
+		}
 	}
-	return (len);
+	ptr[i] = NULL;
+	return (0);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**cpy;
-	int		len;
-	int		k;
-	int		i;
-	int		start;
+	size_t	words;
+	char	**ptr;
 
-	k = -1;
-	i = 0;
-	if (!s || !(cpy = (char **)malloc(sizeof(char *) * (c_w(s, c) + 1))))
-		return (0);
-	while (s[i])
+	if (!s)
+		return (NULL);
+	words = count_words(s, c);
+	ptr = (char **)malloc(sizeof(char *) * (words + 1));
+	if (!ptr)
+		return (NULL);
+	ptr[words] = NULL;
+	if (allocate_words(ptr, (char *)s, c))
 	{
-		len = 0;
-		i += s_p(&s[i], c);
-		start = i;
-		len = len_str(s, i, c);
-		i += len;
-		if (len)
-			if (!(cpy[++k] = ft_substr(s, start, len)))
-				return (freethenipples(cpy));
+		free(ptr);
+		return (NULL);
 	}
-	cpy[++k] = 0;
-	return (cpy);
+	return (ptr);
 }
