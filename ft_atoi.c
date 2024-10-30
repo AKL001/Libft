@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ablabib <ablabib@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ablabib <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/27 16:28:58 by ablabib           #+#    #+#             */
-/*   Updated: 2024/10/29 20:13:42 by ablabib          ###   ########.fr       */
+/*   Created: 2024/10/30 10:41:24 by ablabib           #+#    #+#             */
+/*   Updated: 2024/10/30 10:44:49 by ablabib          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,22 @@
 int	ft_atoi(const char *src)
 {
 	size_t	i;
-	size_t	sign_count;
 	size_t	nb;
 	size_t	sign;
 
-	sign = 1;
 	nb = 0;
 	sign = 1;
-	i = 1;
-	if (src[0] == '-')
-		sign = -1;
+	i = 0;
+	while ((src[i] >= 9 && src[i] <= 13) || src[i] == 32)
+		i++;
+	if (src[i] == '-' || src[i] == '+')
+	{
+		if (src[i + 1] == '+' || src[i + 1] == '-')
+			return (0);
+		else if (src[i] == '-')
+			sign = -1;
+		i++;
+	}
 	while (src[i] >= '0' && src[i] <= '9')
 	{
 		nb = (nb * 10) + (src[i] - '0');

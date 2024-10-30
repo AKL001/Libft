@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ablabib <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/30 10:52:07 by ablabib           #+#    #+#             */
+/*   Updated: 2024/10/30 10:52:37 by ablabib          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
-#include <string.h>
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
@@ -25,16 +36,4 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	}
 	dst[dst_len + i] = '\0';
 	return (total_len);
-}
-
-void	run_test(char *dst, const char *src, size_t size)
-{
-	size_t	result;
-
-	char original_dst[50];     // To preserve original dst for output
-	strcpy(original_dst, dst); // Copy for output
-	result = ft_strlcat(dst, src, size);
-	printf("dst = '%s', src = '%s', size = %zu\n", original_dst, src, size);
-	printf("Resulting dst: '%s'\n", dst);
-	printf("Return value: %zu\n\n", result);
 }

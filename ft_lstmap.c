@@ -1,40 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ablabib <ablabib@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/27 16:30:24 by ablabib           #+#    #+#             */
-/*   Updated: 2024/10/30 10:00:13 by ablabib          ###   ########.fr       */
+/*   Created: 2024/10/30 09:40:02 by ablabib           #+#    #+#             */
+/*   Updated: 2024/10/30 10:49:49 by ablabib          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*strnstr(const char *big, const char *little, size_t len)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	size_t	i;
-	size_t	j;
-	size_t	little_len;
+	t_list	*new_node;
+	t_list	*new_list;
 
-	little_len = ft_strlen(little);
-	if (*little == '\0')
-		return ((char *)big);
-	if (len == 0)
+	if (!lst)
 		return (NULL);
-	i = 0;
-	while (big[i] && i < len)
+	new_list = NULL;
+	while (lst)
 	{
-		if (big[i] == little[0])
+		if (f)
+			new_node = ft_lstnew(f(lst->content));
+		else
+			new_node = ft_lstnew(lst->content);
+		if (!new_node)
 		{
-			j = 0;
-			while (i < len && j < little_len && big[i + j] == little[j])
-				j++;
-			if (j == little_len)
-				return ((char *)(big + i));
+			ft_lstclear(&new_list, del);
+			return (NULL);
 		}
-		i++;
+		ft_lstadd_back(&new_list, new_node);
+		lst = lst->next;
 	}
-	return (NULL);
+	return (new_list);
 }
