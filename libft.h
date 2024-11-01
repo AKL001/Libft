@@ -6,12 +6,13 @@
 /*   By: ablabib <ablabib@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 16:48:18 by ablabib           #+#    #+#             */
-/*   Updated: 2024/10/27 16:48:20 by ablabib          ###   ########.fr       */
+/*   Updated: 2024/11/01 18:23:50 by ablabib          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+
 # include <stddef.h>
 # include <stdio.h>
 # include <stdlib.h>
