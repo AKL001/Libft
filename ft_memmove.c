@@ -6,7 +6,7 @@
 /*   By: ablabib <ablabib@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/27 16:30:17 by ablabib           #+#    #+#             */
-/*   Updated: 2024/10/30 14:08:06 by ablabib          ###   ########.fr       */
+/*   Updated: 2024/11/01 21:23:47 by ablabib          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	if (dest == NULL || src == NULL)
-		return (NULL);
-	if (n == 0 || dest == src)
-		return (dest);
+	if (!dest && !src)
+		return (src);
 	if (dest < src)
 	{
 		ft_memcpy(dest, src, n);
