@@ -6,7 +6,7 @@
 /*   By: ablabib <ablabib@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:33:35 by ablabib           #+#    #+#             */
-/*   Updated: 2024/10/30 13:34:48 by ablabib          ###   ########.fr       */
+/*   Updated: 2024/11/03 16:18:25 by ablabib          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,6 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	ptr[words] = NULL;
 	if (allocate_words(ptr, (char *)s, c))
-	{
-		free(ptr);
 		return (NULL);
-	}
 	return (ptr);
 }
