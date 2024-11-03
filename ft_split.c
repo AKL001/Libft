@@ -6,7 +6,7 @@
 /*   By: ablabib <ablabib@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:33:35 by ablabib           #+#    #+#             */
-/*   Updated: 2024/11/03 16:18:25 by ablabib          ###   ########.fr       */
+/*   Updated: 2024/11/03 18:12:46 by ablabib          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,28 +35,21 @@ static int	count_words(char const *s, char c)
 	return (counter);
 }
 
-static int	safe_allocate(char **ptr, int pos, size_t len)
+static int	free_allocate(char **ptr, int pos)
 {
-	int	i;
-
-	i = 0;
-	*ptr = malloc(len);
-	if (!*ptr)
+	while (pos--)
 	{
-		while (i < pos)
-		{
-			free(ptr[i++]);
-		}
-		free(ptr);
-		return (1);
+		free(ptr[pos]);
 	}
-	return (0);
+	free(ptr);
+	return (1);
 }
 
 static int	allocate_words(char **ptr, char *s, char c)
 {
 	unsigned int	i;
 	size_t			len;
+	char			*word;
 
 	i = 0;
 	while (*s)
@@ -71,11 +64,10 @@ static int	allocate_words(char **ptr, char *s, char c)
 		}
 		if (len > 0)
 		{
-			if (safe_allocate(&ptr[i], i, len + 1))
-				return (1);
-			ft_memcpy(ptr[i], s - len, len);
-			ptr[i][len] = '\0';
-			i++;
+			word = ft_substr(s - len, 0, len);
+			if (!word)
+				return (free_allocate(ptr, i));
+			ptr[i++] = word;
 		}
 	}
 	ptr[i] = NULL;
