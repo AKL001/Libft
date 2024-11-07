@@ -59,7 +59,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(AR) $(NAME) $(OBJS)
 
-bonus: $(BONUS_OBJS)
+bonus: $(NAME) $(BONUS_OBJS)
 	$(AR) $(NAME) $(BONUS_OBJS)
 
 %.o: %.c libft.h
