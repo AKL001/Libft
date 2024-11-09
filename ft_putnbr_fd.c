@@ -17,7 +17,7 @@ void	ft_putnbr_fd(int n, int fd)
 	int	digit;
 
 	if (fd < 0)
-		return;
+		return ;
 	if (n == -2147483648)
 		write(fd, "-2147483648", 11);
 	else if (n < 0)
