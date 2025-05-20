@@ -19,6 +19,8 @@ void	ft_bzero(void *s, size_t n)
 	i = 0;
 	while (i < n)
 	{
+		// We cast to unsigned char* because we want to set memory byte by byte.
+		// Using unsigned avoids issues with sign extension and ensures values are in [0, 255].
 		*((unsigned char *)(s + i)) = 0;
 		i++;
 	}
