@@ -11,6 +11,13 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+/*
+** ft_memmove:
+** Copies 'n' bytes from memory area 'src' to memory area 'dest'.
+** Unlike memcpy, memmove is safe to use when the source and destination
+** memory areas overlap. This is because memmove checks the direction of 
+** copying and performs it in a way that avoids overwriting the source data.
+*/
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
